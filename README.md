@@ -5,7 +5,7 @@ The Folder Map Visualizer is a Tkinter desktop application for exploring the str
 ## Features
 
 - Background directory scanner that keeps the UI responsive while traversing very large folder trees.
-- Treemap visualisation sized by file size and coloured by age, with tooltips and click-to-open support.
+- Treemap visualisation sized by file size and coloured by age, with tooltips, a colour bar legend, and click-to-open support.
 - Filtering controls for minimum file size, file extensions, and maximum file age.
 - Multiple sort options (size, name, modification time) and configurable rectangle limit for performance with huge folders.
 - Dark mode toggle, Matplotlib navigation toolbar, and image export (PNG, SVG, PDF).
@@ -50,5 +50,6 @@ folder_map_visualizer/
 - The scanner walks directories with `os.scandir` and honours a cancellation event so new scans can interrupt previous ones.
 - Treemap rendering uses Matplotlib and `squarify` with a configurable limit on the number of rectangles to ensure interactivity even with >10k files.
 - The application structure keeps scanning, visualisation, and UI concerns separated for easier extension.
+- For a quick syntax check you can run `python -m compileall treemap.py` from inside the `folder_map_visualizer` directory (or `python -m compileall folder_map_visualizer/treemap.py` from the project root). If you see "Can't list 'folder_map_visualizer/treemap.py'" it means the command was executed from inside the package while still using the project-root path.
 
 Feel free to adapt or extend the modules for additional analyses or visualisations.
