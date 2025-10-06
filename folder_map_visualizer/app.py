@@ -158,10 +158,10 @@ class FolderMapApp:
         canvas = FigureCanvasTkAgg(self.figure, master=plot_frame)
         canvas_widget = canvas.get_tk_widget()
         canvas_widget.grid(row=1, column=0, sticky="nsew")
-        toolbar = NavigationToolbar2Tk(canvas, plot_frame)
+        toolbar_frame = ttk.Frame(plot_frame)
+        toolbar_frame.grid(row=0, column=0, sticky="ew")
+        toolbar = NavigationToolbar2Tk(canvas, toolbar_frame)
         toolbar.update()
-        toolbar.pack_forget()
-        toolbar.grid(row=0, column=0, sticky="w")
         self._canvas = canvas
 
         status_bar = ttk.Label(container, textvariable=self.status_var, anchor="w")
