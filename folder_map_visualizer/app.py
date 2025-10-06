@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import queue
+import sys
 import threading
 import time
 from pathlib import Path
@@ -13,9 +14,25 @@ from tkinter import filedialog, messagebox, ttk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
-from . import scanner
-from .scanner import FileInfo
-from .treemap import TreemapVisualizer, build_treemap_items, format_bytes, open_path_in_explorer
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    import folder_map_visualizer.scanner as scanner
+    from folder_map_visualizer.scanner import FileInfo
+    from folder_map_visualizer.treemap import (
+        TreemapVisualizer,
+        build_treemap_items,
+        format_bytes,
+        open_path_in_explorer,
+    )
+else:
+    from . import scanner
+    from .scanner import FileInfo
+    from .treemap import (
+        TreemapVisualizer,
+        build_treemap_items,
+        format_bytes,
+        open_path_in_explorer,
+    )
 
 
 class FolderMapApp:
@@ -141,10 +158,10 @@ class FolderMapApp:
         canvas = FigureCanvasTkAgg(self.figure, master=plot_frame)
         canvas_widget = canvas.get_tk_widget()
         canvas_widget.grid(row=1, column=0, sticky="nsew")
-        toolbar = NavigationToolbar2Tk(canvas, plot_frame)
+        toolbar_frame = ttk.Frame(plot_frame)
+        toolbar_frame.grid(row=0, column=0, sticky="ew")
+        toolbar = NavigationToolbar2Tk(canvas, toolbar_frame)
         toolbar.update()
-        toolbar.pack_forget()
-        toolbar.grid(row=0, column=0, sticky="w")
         self._canvas = canvas
 
         status_bar = ttk.Label(container, textvariable=self.status_var, anchor="w")
