@@ -50,5 +50,6 @@ folder_map_visualizer/
 - The scanner walks directories with `os.scandir` and honours a cancellation event so new scans can interrupt previous ones.
 - Treemap rendering uses Matplotlib and `squarify` with a configurable limit on the number of rectangles to ensure interactivity even with >10k files.
 - The application structure keeps scanning, visualisation, and UI concerns separated for easier extension.
+- For a quick syntax check you can run `python -m compileall treemap.py` from inside the `folder_map_visualizer` directory (or `python -m compileall folder_map_visualizer/treemap.py` from the project root). If you see "Can't list 'folder_map_visualizer/treemap.py'" it means the command was executed from inside the package while still using the project-root path.
 
 Feel free to adapt or extend the modules for additional analyses or visualisations.
