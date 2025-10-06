@@ -18,7 +18,11 @@ from matplotlib.offsetbox import AnchoredText
 from matplotlib.patches import Rectangle
 import squarify
 
-from .scanner import FileInfo
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from folder_map_visualizer.scanner import FileInfo
+else:
+    from .scanner import FileInfo
 
 
 @dataclass
